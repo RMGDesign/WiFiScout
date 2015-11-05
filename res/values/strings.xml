@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">WiFiScout</string>
+    <string name="title_activity_profile">Profiles</string>
+    <string name="name_disp">Edit Name</string>
+    <string name="notes_disp">Edit Notes</string>
+    <string name="title_activity_main">Scanner</string>
+    <string name="action_Scan">Scan</string>
+    <string name="action_Users">UserList</string>
+    <string name="action_Main">Scanner</string>
+    <string name="save">Save</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_users">Users</string> 
+    <string name="empty">Press the Scan Button</string>
+    <string name="label_list">label</string>
+    <string name="no_result_found">Press the Scan Button</string>
+   	
+   	
+
+
+</resources>
