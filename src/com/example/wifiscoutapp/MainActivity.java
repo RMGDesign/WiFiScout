@@ -1,5 +1,7 @@
 package com.example.wifiscoutapp;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.ListActivity;
@@ -54,6 +56,17 @@ public class MainActivity extends ListActivity {
 													// creates an ArrayList of
 													// Users
 		ArrayList<User> use = new ArrayList<User>();
+		File usrs = new File(getFilesDir().toString() + "/users.txt");
+		if (usrs.exists()) {
+
+		} else {
+			try {
+				usrs.createNewFile();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		userExport.exporter(sc, "scan.txt", getFilesDir().toString()); // Stores
 																		// the
 																		// most
@@ -106,7 +119,7 @@ public class MainActivity extends ListActivity {
 			for (int i = 0; i < sc.size(); i++) { // If there are no stored
 													// profiles then the generic
 													// is added to the list
-				t[i] = "New User on Network" + "\n" + "MacAdd"
+				t[i] = "New User on Network" + "\n" + "MacAdd: "
 						+ sc.get(i).getMac();
 			}
 		}

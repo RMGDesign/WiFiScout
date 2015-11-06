@@ -28,21 +28,29 @@ public class ProfileActivity extends Activity {
 
 		Intent intent = getIntent();
 		String message = intent.getStringExtra("profile");
-		ArrayList<User> all = userReader.reader("users.txt", getFilesDir()
-				.toString());
+		ArrayList<User> all = new ArrayList<User>();
+		try {
+			all = userReader.reader("users.txt", getFilesDir().toString());
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+		}
 		ArrayList<User> scanned = userReader.reader("scan.txt", getFilesDir()
 				.toString());
 		String[] fix = message.split(" "); // Manipulates data so only MAC
 											// Address is available
 		String profile = null;
 		int stop = 0;
-		for (int i = 0; i < all.size(); i++) { // Checks through the ArrayLists
-												// to find a match(the data
-												// associated with the profile)
+		if (!(all.isEmpty())) {
+			for (int i = 0; i < all.size(); i++) { // Checks through the
+													// ArrayLists
+													// to find a match(the data
+													// associated with the
+													// profile)
 
-			if (all.get(i).getMac().equals(fix[1])) {
-				profile = all.get(i).toString();
-				stop++;
+				if (all.get(i).getMac().equals(fix[1])) {
+					profile = all.get(i).toString();
+					stop++;
+				}
 			}
 		}
 		for (int c = 0; c < scanned.size(); c++) {
@@ -120,10 +128,10 @@ public class ProfileActivity extends Activity {
 		p.addView(delete, buttonParams); // Created the view Programmatically
 
 		save.setOnClickListener(new View.OnClickListener() { // When the save
-																// button is
-																// clicked the
-																// current state
-																// is taken and
+			// button is
+			// clicked the
+			// current state
+			// is taken and
 			@Override
 			// converted into an object to be stored in the users.txt file
 			public void onClick(View view) {
@@ -135,31 +143,29 @@ public class ProfileActivity extends Activity {
 				for (int i = 0; i < users.size(); i++) {
 					if ((users.get(i).getMac()).equals(macAdd.getText()
 							.toString())) {
-						users.set(i, new User(nameDisp.getText().toString()
-								.replaceAll("[^a-zA-Z0-9]", ""), macAdd // Filter
-																		// out
-																		// any
-																		// signal
-																		// symbols
-																		// the
-																		// user
-																		// may
-																		// have
-																		// typed
-																		// in
+						users.set(i, new User(nameDisp.getText().toString(),
+								macAdd // Filter
+										// out
+										// any
+										// signal
+										// symbols
+										// the
+										// user
+										// may
+										// have
+										// typed
+										// in
 								.getText().toString(), ipAdd.getText()
-								.toString(), notesDisp.getText().toString()
-								.replaceAll("[^a-zA-Z0-9]", ""), userType));
+										.toString(), notesDisp.getText()
+										.toString(), userType));
 						System.out.println(users.get(i).toString() + "r");
 						check++;
 					}
 				}
 				if (check == 0) {
-					users.add(new User(nameDisp.getText().toString()
-							.replaceAll("[^a-zA-Z0-9]", ""), macAdd.getText()
-							.toString(), ipAdd.getText().toString(), notesDisp
-							.getText().toString()
-							.replaceAll("[^a-zA-Z0-9]", ""), userType));
+					users.add(new User(nameDisp.getText().toString(), macAdd
+							.getText().toString(), ipAdd.getText().toString(),
+							notesDisp.getText().toString(), userType));
 				}
 				userExport.exporter(users, "users.txt", getFilesDir() // Export
 																		// the
@@ -177,11 +183,11 @@ public class ProfileActivity extends Activity {
 			}
 		});
 		delete.setOnClickListener(new View.OnClickListener() { // Deletes the
-																// Profile with
-																// a dialog to
-																// make sure
-																// removing the
-																// match
+			// Profile with
+			// a dialog to
+			// make sure
+			// removing the
+			// match
 			@Override
 			// from the ArrayList to be exported
 			public void onClick(View view) {
