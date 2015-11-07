@@ -18,6 +18,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class MainActivity extends ListActivity {
+	ArrayAdapter<String> adt1;
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -125,7 +126,7 @@ public class MainActivity extends ListActivity {
 		}
 
 		// The correctly scanned items are added to the ListView
-		ArrayAdapter<String> adt1 = new ArrayAdapter<String>(this,
+		adt1 = new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_1, t);
 		setListAdapter(adt1);
 

@@ -28,7 +28,7 @@ public class Scanner {
 			while ((line = br.readLine()) != null) {
 				String[] splitted = line.split("[  ]+");
 				if (splitted != null && splitted.length >= 4) {
-
+					System.out.println(line);
 					if (!splitted[3].equals("00:00:00:00:00:00")
 							&& !splitted[3].equals("type")) {
 						ipAdd = splitted[0];
@@ -46,14 +46,23 @@ public class Scanner {
 		String splitter[] = ipAdd.split("\\."); // Take the Host Address and
 												// manipulate it to become the
 												// broadcast address
-		String broadcast = splitter[0] + "." + splitter[1] + "." + splitter[2]
-				+ "." + "255";
-		String pingComm = "ping -b " + broadcast; // Ping the broadcast address
-													// using a UNIX command so
-													// every device responds
+		String broadcast = splitter[0] + "." + splitter[1] + "." + "135" + "."
+				+ "255";
+		String pingComm = "ping -c 1 -b " + broadcast; // Ping the
+														// broadcast
+														// address
+		// using a UNIX command so
+		// every device responds
+		System.out.println(pingComm);
 		try { // and sends it's MAC Address to the ARP Table
-			Runtime.getRuntime().exec(pingComm);
+			Runtime r = Runtime.getRuntime();
+			Process process = r.exec(pingComm);
+			process.waitFor();
+
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -78,6 +87,7 @@ public class Scanner {
 
 					if (!splitted[3].equals("00:00:00:00:00:00")
 							&& !splitted[3].equals("type")) {
+						System.out.println(line);
 						ipAdd = splitted[0];
 						mac = splitted[3];
 						scanned.add(new User(mac, ipAdd));
