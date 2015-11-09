@@ -1,0 +1,3 @@
+# WiFiScout
+An Android Application which allows users to scan their local Wireless network for devices connected to the network, and associate these devices with names and sort them by authorization.
+This application is still a work in progress as we devise ways of retrieving mac addresses more thoroughly and efficiently. We are always looking for the best way of doing this whether it be pinging a broadcast address and missing those pcs that don't respond or pinging the entire range of addresses and dealing with the time to respond. There is no simple mechanism for doing this natively but development contnues. 
