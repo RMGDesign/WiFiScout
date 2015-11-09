@@ -11,19 +11,9 @@ public class Scanner {
 
 		String ipAdd = null;
 		new ArrayList<User>();
-		BufferedReader br = null;
+		BufferedReader br;
 		try {
-			br = new BufferedReader(new FileReader("/proc/net/arp")); // Parses
-																		// the
-																		// first
-																		// IP
-																		// address
-																		// on
-																		// the
-																		// arp
-																		// table
-																		// to
-																		// get
+			br = new BufferedReader(new FileReader("/proc/net/arp"));
 			String line; // the host ip address
 			while ((line = br.readLine()) != null) {
 				String[] splitted = line.split("[  ]+");
@@ -38,10 +28,20 @@ public class Scanner {
 				}
 
 			}
-			br.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		} catch (Exception e1) {
+
+			e1.printStackTrace();
+		} // Parses
+			// the
+			// first
+			// IP
+			// address
+			// on
+			// the
+			// arp
+			// table
+			// to
+			// get
 
 		String splitter[] = ipAdd.split("\\."); // Take the Host Address and
 												// manipulate it to become the
@@ -54,14 +54,11 @@ public class Scanner {
 		// using a UNIX command so
 		// every device responds
 		System.out.println(pingComm);
-		try { // and sends it's MAC Address to the ARP Table
-			Runtime r = Runtime.getRuntime();
-			Process process = r.exec(pingComm);
-			process.waitFor();
 
+		Runtime r = Runtime.getRuntime();
+		try {
+			Process process = r.exec(pingComm);
 		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
